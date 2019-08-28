@@ -1,0 +1,38 @@
+[
+  {
+    "projectId": 1,
+    "title": "Create Todo App",
+    "todos": [
+      {
+        "todoId": 1,
+        "title": "create react repo",
+      },
+      {
+        "todoId": 2,
+        "title": "build UI components",
+      },
+      {
+        "todoId": 3,
+        "title": "style/design todo app",
+      },
+    ]
+  },
+  {
+    "projectId": 2,
+    "title": "Go On Vacation",
+    "todos": [
+      {
+        "todoId": 4,
+        "title": "Buy plane tickets",
+      },
+      {
+        "todoId": 5,
+        "title": "Make sure to pack a suitcase",
+      },
+      {
+        "todoId": 6,
+        "title": "Have FUN!",
+      },
+    ]
+  }
+]
