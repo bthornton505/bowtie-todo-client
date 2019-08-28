@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Projects extends Component {
   render() {
     return(
-      <div className="border border-secondary p-4">
+      <div className="border border-secondary p-4 rounded-lg">
         <h2>Projects</h2>
         <hr></hr>
         <p>
