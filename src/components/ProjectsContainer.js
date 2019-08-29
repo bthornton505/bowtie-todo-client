@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Projects from './Projects';
+import AllProjects from './AllProjects';
+import Button from './Button';
 
 class ProjectsContainer extends Component {
   state = {
@@ -22,9 +23,13 @@ class ProjectsContainer extends Component {
 
     return(
       <div className="border border-secondary p-4 rounded-lg">
-        <h2 className="p-3">Projects</h2>
+        <h2 className="text-center p-3">Projects</h2>
 
-        <Projects projects={projects} />
+        <AllProjects projects={projects} />
+
+        <div className="flex-row text-center pt-4">
+          <Button path={'/project/new'} buttonText={'New'}/>
+        </div>
       </div>
     )
   }
