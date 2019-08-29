@@ -1,5 +1,6 @@
 import React from 'react';
-import Projects from './components/Projects';
+import Routes from './Routes'
+// import ProjectsContainer from './components/ProjectsContainer';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         Todo App
       </h1>
 
-      <Projects />
+      <Routes />
 
     </div>
   );
