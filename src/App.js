@@ -4,8 +4,8 @@ import Routes from './Routes'
 
 function App() {
   return (
-    <div className="container text-center w-50 p-3">
-      <h1 className="p-3">
+    <div className="container w-50 p-3">
+      <h1 className="text-center p-3">
         Todo App
       </h1>
 
