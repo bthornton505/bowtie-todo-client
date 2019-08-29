@@ -22,4 +22,9 @@ const AllProjects = (props) => {
   )
 }
 
+AllProjects.defaultProps = {
+  recipes: []
+}
+
+
 export default AllProjects;
