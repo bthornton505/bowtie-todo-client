@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom'
 
-class Projects extends Component {
-  render() {
-    return(
-      <div className="border border-secondary p-4 rounded-lg">
-        <h2>Projects</h2>
-        <hr></hr>
-        <p>
-          Create todo app
-        </p>
-      </div>
-    )
-  }
+const Projects = (props) => {
+   const projectList = props.projects.map(project => {
+     return(
+       <li className="list-group-item list-group-item-action">
+        <Link to={{
+          pathname: `/project/${project.name}`
+        }}>
+          {project.name}
+        </Link>
+       </li>
+     )
+   })
+
+  return(
+    <ul className="list-group list-group-flush">
+      {projectList}
+    </ul>
+  )
 }
 
 export default Projects;
