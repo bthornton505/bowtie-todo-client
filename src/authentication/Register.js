@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Button from '../components/Button';
 
+import { signup } from '../fetchRequests/requests'
+
 class Register extends Component {
   constructor(){
     super()
@@ -23,15 +25,7 @@ class Register extends Component {
     event.preventDefault()
     const user = this.state
 
-    fetch('server', {
-      method: "POST",
-      headers: {
-        "Content-Type": 'application/json'
-      },
-      body: JSON.stringify( user )
-    })
-    .then(response => response.json())
-    .catch(error => console.log(error))
+    signup(user)
 
     this.setState({
       username: "",
@@ -47,7 +41,7 @@ class Register extends Component {
           Sign Up
         </h2>
         <hr></hr>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Username</label>
             <input
@@ -76,7 +70,7 @@ class Register extends Component {
             <label htmlFor="formGroupExampleInput">Password</label>
             <input
               name="password"
-              type="text"
+              type="password"
               className="form-control"
               id="formGroupExampleInput"
               placeholder="Password"
