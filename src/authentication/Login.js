@@ -17,7 +17,7 @@ class Login extends Component {
         <h2 className="text-center p-3">
           Login
         </h2>
-
+        <hr></hr>
         <form>
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Email</label>
