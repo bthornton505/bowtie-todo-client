@@ -1,6 +1,5 @@
 import React from 'react';
 import Routes from './Routes'
-// import ProjectsContainer from './components/ProjectsContainer';
 
 function App() {
   return (
