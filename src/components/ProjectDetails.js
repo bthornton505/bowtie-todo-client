@@ -16,7 +16,7 @@ const ProjectDetails = () => {
       </ul>
 
       <div className="flex-row text-center pt-4">
-        <Button path={'/'} buttonText={'Back'}/>
+        <Button path={'/projects'} buttonText={'Back'}/>
         <Button path={'/project/:name/edit'} buttonText={'Edit'}/>
       </div>
     </div>
