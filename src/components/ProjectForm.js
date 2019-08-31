@@ -42,7 +42,7 @@ class ProjectForm extends Component {
     return(
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">New Project</h2>
-
+        <hr></hr>
         <form>
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Project Title</label>

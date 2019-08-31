@@ -46,7 +46,7 @@ class Register extends Component {
         <h2 className="text-center p-3">
           Sign Up
         </h2>
-
+        <hr></hr>
         <form>
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Username</label>
