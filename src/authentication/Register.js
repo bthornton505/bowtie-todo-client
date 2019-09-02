@@ -48,7 +48,6 @@ class Register extends Component {
               name="username"
               type="text"
               className="form-control"
-              id="formGroupExampleInput"
               placeholder="Username"
               value={this.state.username}
               onChange={this.handleChange}
@@ -60,7 +59,6 @@ class Register extends Component {
               name="email"
               type="text"
               className="form-control"
-              id="formGroupExampleInput"
               placeholder="Email"
               value={this.state.email}
               onChange={this.handleChange}
@@ -72,7 +70,6 @@ class Register extends Component {
               name="password"
               type="password"
               className="form-control"
-              id="formGroupExampleInput"
               placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
