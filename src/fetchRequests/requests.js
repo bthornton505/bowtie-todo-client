@@ -1,4 +1,4 @@
-// API_URL = ``
+const API_URL = `http://localhost:3000`
 
 const authRequest = () => {
   return {
@@ -24,15 +24,16 @@ const authFailure = (errors) => {
 
 export const signup = (user) => {
   const newUser = user
-  return fetch(`/api/signup`, {
+  fetch(`${API_URL}/api/v1/signup`, {
     method: "POST",
+    mode: 'cors',
     headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
+      'Accept': "application/json",
+      'Content-Type': "application/json"
     },
     body: JSON.stringify( user )
   })
-  .then(response => response.json())
+  .then(response => console.log(response.json()))
   .then(resp => {
     authenticate({
       username: newUser.username,
@@ -40,7 +41,7 @@ export const signup = (user) => {
       password: newUser.password})
   })
   .catch((errors) => {
-    authFailure(errors)
+    console.log(errors)
   })
 }
 
@@ -48,7 +49,7 @@ export const authenticate = (credentials) => {
   console.log("calling function")
   authRequest()
 
-  return fetch(`/api/auth/login`, {
+  fetch(`${API_URL}/api/v1/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -72,7 +73,7 @@ export const authenticate = (credentials) => {
 }
 
 export const getUser = (credentials) => {
-  const request = new Request(`/api/find_user`, {
+  return fetch(`${API_URL}/api/v1/find_user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -80,13 +81,11 @@ export const getUser = (credentials) => {
     },
     body: JSON.stringify(credentials)
   })
-  return fetch(request)
-    .then(response => response.json())
-    .then(user => { return user })
-    .catch(error => {
-      return error;
-    }
-  );
+  .then(response => response.json())
+  .then(user => { return user })
+  .catch(error => {
+    return error;
+  });
 }
 
 export const logout = () => {
