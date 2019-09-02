@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Routes from './Routes'
 
-function App() {
-  return (
-    <div className="container w-50 p-3">
-      <h1 className="text-center p-3">
-        Todo App
-      </h1>
+import { checkToken } from './fetchRequests/requests'
 
-      <Routes />
+class App extends Component {
+  state = {
+    user: {},
+    isAuthenticated: false
+  }
 
-    </div>
-  );
+  componentDidMount = () => {
+    const authToken = localStorage.auth_token
+    console.log(authToken)
+
+    if (authToken) {
+      return checkToken(authToken)
+    }
+  }
+
+  render(){
+    return (
+      <div className="container w-50 p-3">
+        <h1 className="text-center p-3">
+          To-do App
+        </h1>
+
+        <Routes user={this.state.user} isAuthenticated={this.state.isAuthenticated}/>
+
+      </div>
+    );
+  }
 }
 
 export default App;
