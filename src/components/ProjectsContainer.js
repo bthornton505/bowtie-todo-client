@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import AllProjects from './AllProjects';
 import Button from './Button';
+import { Redirect, withRouter } from 'react-router-dom';
+
+import { logout } from '../fetchRequests/requests'
 
 class ProjectsContainer extends Component {
-  state = {
-    projects: [],
+  constructor(){
+    super()
+
+    this.state = {
+      projects: [],
+      loggedOut: false
+    }
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=3')
       .then(response => response.json())
       .then(projects => {
@@ -18,7 +26,18 @@ class ProjectsContainer extends Component {
       .catch(error => console.log(error))
   }
 
+  handleLogout = event => {
+    event.preventDefault();
+    logout()
+    this.setState({
+      loggedOut: true
+    })
+  }
+
   render() {
+    if (this.state.loggedOut) {
+      return <Redirect to="/login" />
+    }
     const projects = this.state.projects
 
     return(
@@ -28,11 +47,19 @@ class ProjectsContainer extends Component {
         <AllProjects projects={projects} />
 
         <div className="flex-row text-center pt-4">
-          <Button path={'/project/new'} buttonText={'New'}/>
+          <button
+            className="text-center m-2 btn btn-primary"
+            onClick={this.handleLogout}>Log Out
+          </button>
+          <Button
+            path={'/project/new'}
+            buttonText={'New'}
+            onClick={this.handleLogout}
+          />
         </div>
       </div>
     )
   }
 }
 
-export default ProjectsContainer;
+export default withRouter(ProjectsContainer);
