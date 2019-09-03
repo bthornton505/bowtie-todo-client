@@ -1,10 +1,10 @@
 const API_URL = `http://localhost:3000`
 
-const authRequest = () => {
-  return {
-    message: "AUTHENTICATION REQUEST"
-  }
-}
+// const authRequest = () => {
+//   return {
+//     message: "AUTHENTICATION REQUEST"
+//   }
+// }
 
 const authSuccess = (user, token) => {
   return {
@@ -26,7 +26,6 @@ export const signup = (user) => {
   const newUser = user
   fetch(`${API_URL}/api/v1/signup`, {
     method: "POST",
-    mode: 'cors',
     headers: {
       'Accept': "application/json",
       'Content-Type': "application/json"
@@ -41,13 +40,12 @@ export const signup = (user) => {
       password: newUser.password})
   })
   .catch((errors) => {
-    console.log(errors)
+    authFailure(errors)
   })
 }
 
 export const authenticate = (credentials) => {
   console.log("calling function")
-  authRequest()
 
   fetch(`${API_URL}/api/v1/auth/login`, {
     method: "POST",
@@ -60,15 +58,16 @@ export const authenticate = (credentials) => {
   .then(({ auth_token }) => {
     if (!auth_token) return false
     localStorage.setItem('auth_token', auth_token);
+    // console.log(credentials)
     return getUser(credentials)
   })
   .then((user) => {
-    if (user === false) return false
-      authSuccess(user, localStorage.auth_token)
+    authSuccess(user, localStorage.auth_token)
   })
   .catch((errors) => {
     authFailure(errors)
-    localStorage.clear()
+    // console.log(errors)
+
   })
 }
 
@@ -82,9 +81,16 @@ export const getUser = (credentials) => {
     body: JSON.stringify(credentials)
   })
   .then(response => response.json())
-  .then(user => { return user })
+  .then(user => {
+    // console.log(user)
+    localStorage.setItem('userId', user.id)
+    localStorage.setItem('user', user.username)
+    localStorage.setItem('isAuthenticated', true)
+    // return user
+  })
   .catch(error => {
-    return error;
+    authFailure(error)
+    console.log(error);
   });
 }
 
@@ -94,7 +100,7 @@ export const logout = () => {
 
 export const checkToken = (token) => {
   console.log("calling function")
-  authRequest()
+  // authRequest()
 
   return fetch(`/api/auth/check_token`, {
     method: "GET",
@@ -109,11 +115,12 @@ export const checkToken = (token) => {
     return getUser({email})
   })
   .then((user) => {
-    if (user === false) return false
+    // if (user === false) return false
       authSuccess(user, localStorage.auth_token)
   })
   .catch((errors) => {
     authFailure(errors)
+    // console.log(errors)
     localStorage.clear()
   })
 }
