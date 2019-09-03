@@ -2,10 +2,12 @@ import React from 'react';
 import Button from './Button';
 import AddTodo from './AddTodo'
 
-const ProjectDetails = () => {
+const ProjectDetails = (props) => {
+  const { project } = props.location.state
+  console.log(project)
   return(
     <div className="border border-secondary p-4 rounded-lg">
-      <h2 className="text-center p-3">Project Name</h2>
+      <h2 className="text-center p-3">{project.title}</h2>
 
       <AddTodo />
 
@@ -17,7 +19,7 @@ const ProjectDetails = () => {
 
       <div className="flex-row text-center pt-4">
         <Button path={'/projects'} buttonText={'Back'}/>
-        <Button path={'/project/:name/edit'} buttonText={'Edit'}/>
+        <Button path={'/project/:title/edit'} buttonText={'Edit'}/>
       </div>
     </div>
   )
