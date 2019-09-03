@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Routes from './Routes'
 
-import { checkToken } from './fetchRequests/requests'
+// import { checkToken } from './fetchRequests/requests'
 
 class App extends Component {
 
