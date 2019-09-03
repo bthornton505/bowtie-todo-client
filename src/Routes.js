@@ -8,30 +8,27 @@ import ProjectsContainer from './components/ProjectsContainer';
 import ProjectForm from './components/ProjectForm';
 import ProjectDetails from './components/ProjectDetails';
 
-const Routes = () => {
+const Routes = (props) => {
 
   const guestViews = (
     <Switch>
       <Route exact path="/" component={LandingPage} />
-      <Route exact path="/signup" component={Register} />
-      <Route exact path="/login" component={Login} />
+      <Route path="/signup" component={Register} />
+      <Route path="/login" component={Login} />
     </Switch>
   )
 
   const userViews = (
     <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route exact path="/signup" component={Register} />
-      <Route exact path="/login" component={Login} />
       <Route exact path="/projects" component={ProjectsContainer} />
-      <Route exact path="/project/new" component={ProjectForm} />
-      <Route exact path="/project/:name" component={ProjectDetails}/>
+      <Route path="/project/new" component={ProjectForm} />
+      <Route path="/project/:name" component={ProjectDetails}/>
     </Switch>
   )
 
   return(
     <Router>
-      {userViews}
+      {props.isAuthenticated ? userViews : guestViews}
     </Router>
   )
 }
