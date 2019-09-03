@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../components/Button';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import { signup } from '../fetchRequests/requests'
 
@@ -10,7 +11,8 @@ class Register extends Component {
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      submitted: false
     }
   }
 
@@ -28,13 +30,18 @@ class Register extends Component {
     signup(user)
 
     this.setState({
-      username: "",
-      email: "",
-      password: ""
+      submitted: true
     })
   }
 
   render(){
+    const { submitted } = this.state
+    const authToken = localStorage.auth_token
+
+    if (submitted === true && authToken !== undefined ){
+      return <Redirect to='/projects' />
+    }
+
     return(
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">
@@ -83,4 +90,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);
