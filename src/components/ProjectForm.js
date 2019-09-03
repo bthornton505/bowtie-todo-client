@@ -42,7 +42,6 @@ class ProjectForm extends Component {
 
   render(){
     const { isCreated } = this.state
-
     if (isCreated === true) {
       return <Redirect to="/projects" />
     }
@@ -58,7 +57,6 @@ class ProjectForm extends Component {
               name="title"
               type="text"
               className="form-control"
-              id="formGroupExampleInput"
               placeholder="Add Title"
               value={this.state.title}
               onChange={this.handleChange}
