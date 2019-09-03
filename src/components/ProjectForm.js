@@ -57,7 +57,7 @@ class ProjectForm extends Component {
             />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
-          <Button path={'/'} buttonText={'Back'}/>
+          <Button path={'/projects'} buttonText={'Back'}/>
         </form>
 
       </div>
