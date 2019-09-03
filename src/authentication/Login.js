@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../components/Button';
+import { Redirect } from 'react-router-dom';
 
 import { authenticate } from '../fetchRequests/requests'
 
@@ -9,7 +10,8 @@ class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      submitted: false
     }
   }
 
@@ -20,20 +22,25 @@ class Login extends Component {
     });
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault()
     const credentials = this.state
 
     authenticate(credentials)
 
     this.setState({
-      username: "",
-      email: "",
-      password: ""
-    })
+      submitted: true
+    });
   }
 
   render(){
+    const { submitted } = this.state
+    // const authToken = localStorage.auth_token
+
+    if (submitted === true){
+      return <Redirect to="/projects" />
+    }
+
     return(
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">
@@ -47,7 +54,6 @@ class Login extends Component {
               name="email"
               type="text"
               className="form-control"
-              id="formGroupExampleInput"
               placeholder="Email"
               value={this.state.email}
               onChange={this.handleChange}
@@ -57,9 +63,8 @@ class Login extends Component {
             <label htmlFor="formGroupExampleInput">Password</label>
             <input
               name="password"
-              type="text"
+              type="password"
               className="form-control"
-              id="formGroupExampleInput"
               placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
