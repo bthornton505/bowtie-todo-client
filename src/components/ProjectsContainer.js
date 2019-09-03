@@ -3,7 +3,7 @@ import AllProjects from './AllProjects';
 import Button from './Button';
 import { Redirect, withRouter } from 'react-router-dom';
 import API_URL from '../fetchRequests/apiUrl';
-import { logout } from '../fetchRequests/requests'
+// import { logout } from '../fetchRequests/requests'
 
 class ProjectsContainer extends Component {
   constructor(){
@@ -33,16 +33,19 @@ class ProjectsContainer extends Component {
 
   handleLogout = event => {
     event.preventDefault();
-    logout()
+    // logout()
+    localStorage.clear();
     this.setState({
       loggedOut: true
     })
   }
 
   render() {
-    if (this.state.loggedOut) {
+    const { loggedOut } = this.state
+    if (loggedOut === true) {
       return <Redirect to="/login" />
     }
+
     const projects = this.state.projects
     console.log(projects)
 
@@ -51,6 +54,7 @@ class ProjectsContainer extends Component {
         <h2 className="text-center p-3">Projects</h2>
 
         <AllProjects projects={projects} />
+        {/* Need to create Project component which will fetch the desired project */}
 
         <div className="flex-row text-center pt-4">
           <button
@@ -60,7 +64,6 @@ class ProjectsContainer extends Component {
           <Button
             path={'/project/new'}
             buttonText={'New'}
-            onClick={this.handleLogout}
           />
         </div>
       </div>
