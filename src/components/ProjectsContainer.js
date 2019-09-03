@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AllProjects from './AllProjects';
 import Button from './Button';
 import { Redirect, withRouter } from 'react-router-dom';
-
+import API_URL from '../fetchRequests/apiUrl';
 import { logout } from '../fetchRequests/requests'
 
 class ProjectsContainer extends Component {
@@ -16,14 +16,19 @@ class ProjectsContainer extends Component {
   }
 
   componentDidMount = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=3')
-      .then(response => response.json())
-      .then(projects => {
-        this.setState({
-          projects: projects.results
-        })
+    fetch(`${API_URL}/api/v1/projects`, {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Bearer ${localStorage.auth_token}`
+      }
+    })
+    .then(response => response.json())
+    .then(projects => {
+      this.setState({
+        projects: projects
       })
-      .catch(error => console.log(error))
+    })
+    .catch(error => console.log(error))
   }
 
   handleLogout = event => {
@@ -39,6 +44,7 @@ class ProjectsContainer extends Component {
       return <Redirect to="/login" />
     }
     const projects = this.state.projects
+    console.log(projects)
 
     return(
       <div className="border border-secondary p-4 rounded-lg">
