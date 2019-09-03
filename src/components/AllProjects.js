@@ -7,9 +7,9 @@ const AllProjects = (props) => {
      return(
        <li className="list-group-item list-group-item-action">
         <Link to={{
-          pathname: `/project/${project.name}`
+          pathname: `/project/${project.title}`
         }}>
-          {project.name}
+          {project.title}
         </Link>
        </li>
      )
@@ -23,7 +23,7 @@ const AllProjects = (props) => {
 }
 
 AllProjects.defaultProps = {
-  recipes: []
+  projects: []
 }
 
 
