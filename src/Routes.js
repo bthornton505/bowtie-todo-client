@@ -23,8 +23,8 @@ const Routes = (props) => {
     <Switch>
       <Route exact path="/projects" component={ProjectsContainer} />
       <Route exact path="/project/new" component={ProjectForm} />
-      <Route exact path="/project/:title" component={ProjectDetails}/>
-      <Route exact path="/project/:title/edit" component={EditProject} />
+      <Route exact path="/project/:id" component={ProjectDetails}/>
+      <Route exact path="/project/:id/edit" component={EditProject} />
       {/* The above route needs to render a Project component */}
     </Switch>
   )
