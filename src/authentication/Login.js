@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../components/Button';
 import { Redirect } from 'react-router-dom';
+// import API_URL from '../fetchRequests/apiUrl';
 
 import { authenticate } from '../fetchRequests/requests'
 
