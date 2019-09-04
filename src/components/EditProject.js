@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from './Button';
 import { Redirect } from 'react-router-dom';
 import API_URL from '../fetchRequests/apiUrl';
+import AddTodo from './AddTodo';
 
 class EditProject extends Component {
   constructor(props){
@@ -10,6 +11,11 @@ class EditProject extends Component {
     this.state = {
       project: this.props.location.state.project,
       title: "",
+      // todo: {
+      //   title: "",
+      //   completed: false
+      // },
+      // todos: [],
       updated: false
     }
   }
@@ -20,6 +26,16 @@ class EditProject extends Component {
       [name]: value
     });
   }
+
+  // handleTodoChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: {
+  //       title: value,
+  //       completed: false
+  //     }
+  //   });
+  // }
 
   handleUpdate = event => {
     event.preventDefault();
