@@ -1,15 +1,10 @@
 import React from 'react';
+import Todo from './Todo';
 
 const AllTodos = (props) => {
-  const todoList = props.todos.map(todos => {
+  const todoList = props.todos.map(todo => {
     return(
-      <li key={todos.id} className="list-group-item">
-        <input type="checkbox" className="form-check-input"/>
-        <span className="name">{todos.title}</span>
-        <button className="btn btn-danger btn-xs pull-right close" type="submit">
-          x
-        </button>
-      </li>
+      <Todo todo={todo} />
     )
   })
 
