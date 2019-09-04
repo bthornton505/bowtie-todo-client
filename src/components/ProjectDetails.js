@@ -28,6 +28,24 @@ class ProjectDetails extends Component {
     .catch(error => console.log(error))
   }
 
+  updateTodo = (event, todo) => {
+    event.preventDefault();
+
+    fetch(`${API_URL}/api/v1/todos/${todo.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": 'application/json',
+        "Authorization": `Bearer ${localStorage.auth_token}`
+      },
+      body: JSON.stringify( todo )
+    })
+    .then(response => response.json())
+    // .then(() => this.setState({
+    //   updated: true
+    // }))
+    .catch(error => console.log(error))
+  }
+
   deleteProject = (event) => {
     const { project } = this.state
 
