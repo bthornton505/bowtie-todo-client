@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import Button from './Button';
-// import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import API_URL from '../fetchRequests/apiUrl';
 
 class EditProject extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
+      project: this.props.location.state.project,
       title: "",
+      updated: false
     }
   }
 
@@ -18,15 +21,39 @@ class EditProject extends Component {
     });
   }
 
+  handleUpdate = event => {
+    event.preventDefault();
+    const projectId = this.state.project.id
+    const project = {title: this.state.title, userId: this.state.project.userId}
+
+    fetch(`${API_URL}/api/v1/projects/${projectId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": 'application/json',
+        "Authorization": `Bearer ${localStorage.auth_token}`
+      },
+      body: JSON.stringify( project )
+    })
+    .then(response => response.json())
+    .then(() => this.setState({
+      updated: true
+    }))
+    .catch(error => console.log(error))
+
+  }
+
   render(){
-    const { project } = this.props.location.state
-    console.log(project)
+    const { project, updated } = this.state
+
+    if (updated === true){
+      return <Redirect to={`/project/${project.id}`} />
+    }
 
     return(
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">Edit Project</h2>
         <hr></hr>
-        <form>
+        <form onSubmit={this.handleUpdate}>
           <div className="form-group">
             <label htmlFor="formGroupExampleInput">Project Title</label>
             <input
@@ -39,12 +66,9 @@ class EditProject extends Component {
             />
           </div>
 
-          <div className="flex-row">
-            <button type="submit" className="btn btn-primary">Update</button>
-            <Button path={`/project/${project.id}`} buttonText={'Back'}/>
-          </div>
+          <button type="submit" className="btn btn-primary">Update</button>
+          <Button path={`/project/${project.id}`} buttonText={'Back'}/>
         </form>
-
       </div>
     )
   }
