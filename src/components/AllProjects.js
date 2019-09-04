@@ -7,10 +7,7 @@ const AllProjects = (props) => {
      return(
        <li key={project.id} className="list-group-item list-group-item-action">
         <Link to={{
-          pathname: `/project/${project.title}`,
-          state: {
-            project: project
-          }
+          pathname: `/project/${project.id}`,
         }}>
           {project.title}
         </Link>
