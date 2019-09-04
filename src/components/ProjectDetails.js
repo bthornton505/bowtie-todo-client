@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Button from './Button';
 import AddTodo from './AddTodo'
 import API_URL from '../fetchRequests/apiUrl';
+import AllTodos from './AllTodos';
 
 class ProjectDetails extends Component {
   state = {
@@ -59,13 +60,9 @@ class ProjectDetails extends Component {
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">{project.title}</h2>
 
-        <AddTodo />
+        <AddTodo projectId={project.id} />
 
-        <ul className="text-center list-group list-group-flush">
-          <li className="list-group-item list-group-item-action">todo #1</li>
-          <li className="list-group-item list-group-item-action">todo #2</li>
-          <li className="list-group-item list-group-item-action">todo #3</li>
-        </ul>
+        <AllTodos todos={project.todos}/>
 
         <div className="flex-row text-center pt-4">
           <Button path={'/projects'} buttonText={'Back'}/>
