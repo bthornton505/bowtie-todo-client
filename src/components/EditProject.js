@@ -10,7 +10,7 @@ class EditProject extends Component {
 
     this.state = {
       project: this.props.location.state.project,
-      title: "",
+      title: this.props.location.state.project.title,
       // todo: {
       //   title: "",
       //   completed: false
