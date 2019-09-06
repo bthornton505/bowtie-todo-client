@@ -23,15 +23,15 @@ class Register extends Component {
     });
   }
 
-  handleSubmit = event => {
+  handleSubmit = async (event) => {
     event.preventDefault()
     const user = this.state
 
-    signup(user)
+    await signup(user)
 
     this.setState({
       submitted: true
-    })
+    }, () => this.props.handleLoginChange())
   }
 
   render(){
@@ -58,6 +58,7 @@ class Register extends Component {
               placeholder="Username"
               value={this.state.username}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -69,6 +70,7 @@ class Register extends Component {
               placeholder="Email"
               value={this.state.email}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -80,6 +82,7 @@ class Register extends Component {
               placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
+              required
             />
           </div>
           <button type="submit" className="btn btn-primary">Signup</button>

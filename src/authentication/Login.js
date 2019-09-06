@@ -23,15 +23,15 @@ class Login extends Component {
     });
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
     const credentials = this.state
 
-    authenticate(credentials)
+    await authenticate(credentials)
 
     this.setState({
       submitted: true
-    });
+    }, () => this.props.handleLoginChange());
   }
 
   render(){
@@ -58,6 +58,7 @@ class Login extends Component {
               placeholder="Email"
               value={this.state.email}
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-group">
@@ -69,6 +70,7 @@ class Login extends Component {
               placeholder="Password"
               value={this.state.password}
               onChange={this.handleChange}
+              required
             />
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
