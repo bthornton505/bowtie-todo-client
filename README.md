@@ -23,7 +23,7 @@ Assuming you have React and Node.js installed,
 
 ## Frameworks and Libraries Used
 
-- Front-end: JavaScript libraries [React](https://reactjs.org/)
+- Front-end: [React](https://reactjs.org/)
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 - [Twitter Bootstrap](https://getbootstrap.com/)
 
