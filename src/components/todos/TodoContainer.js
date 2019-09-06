@@ -78,7 +78,7 @@ class TodoContainer extends Component {
     })
     .then(response => response.json())
     .then((response) => {
-      this.addProjectTodo(response)
+      this.addProjectTodo(response.todo)
       this.setState({
         title: "",
       })
