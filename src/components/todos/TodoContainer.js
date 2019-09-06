@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import API_URL from '../fetchRequests/apiUrl';
-import AddTodo from './AddTodo';
+import API_URL from '../../fetchRequests/apiUrl';
 import AllTodos from './AllTodos';
-import { networkRequest } from '../fetchRequests/requests';
+import { networkRequest } from '../../fetchRequests/requests';
 
 class TodoContainer extends Component {
   constructor(){
@@ -20,28 +19,45 @@ class TodoContainer extends Component {
     });
   }
 
+  // This function updates whether a todo has been completed or not
   updateTodo = (id) => {
+    // first we find the index of the todo within its project
     const todoIndex = this.props.project.todos.findIndex(todo => todo.id === id)
+    // We create a new version of the todo with its updated attribute
     const todo = Object.assign({}, this.props.project.todos[todoIndex], {
       ...this.props.project.todos[todoIndex],
       completed: !(this.props.project.todos[todoIndex].completed)
     })
-    networkRequest(`/todos/${id}`, 'PATCH', todo)
+    // We create a variable to hold all of the projects todos
     const todos = Object.assign([], this.props.project.todos)
+    // We take our new todo and update the specific index with its new value
     todos[todoIndex] = todo
+    // Once the todo is properly constructed we send it in our fetch request to the server
+    networkRequest(`/todos/${id}`, 'PATCH', todo)
+    // Lastly, we update the state of our ProjectDetails component which then,
+    // updates the AllTodos component
     this.props.addOrRemoveTodo(todos)
   }
 
-  addProjectTodos = ({ id, title, project_id, completed }) => {
-    const newTodos = [{ id, title, project_id, completed }]
+  // This function handles adding Todos
+  addProjectTodo = ({ id, title, project_id, completed }) => {
+    // We construct our newTodo with the server response data
+    const newTodo = [{ id, title, project_id, completed }]
+    // We then update the state of our ProjectDetails component which then,
+    // updates the AllTodos component
     this.props.addOrRemoveTodo(
-      (this.props.project.todos || []).concat(newTodos)
+      (this.props.project.todos || []).concat(newTodo)
     )
   }
 
-  removeProjectTodos = (id) => {
+  // This function handles deleting a projects todos
+  removeProjectTodo = (id) => {
+    // We send our Delete Fetch request with the todo id
     networkRequest(`/todos/${id}`, 'DELETE')
+    // Then construct an updated version of the projects todos
     const newTodos = this.props.project.todos.filter(todo => todo.id !== id)
+    // We then update the state of our ProjectDetails component which then,
+    // updates the AllTodos component
     this.props.addOrRemoveTodo(newTodos)
   }
 
@@ -62,9 +78,8 @@ class TodoContainer extends Component {
     })
     .then(response => response.json())
     .then((response) => {
-      this.addProjectTodos(response)
+      this.addProjectTodo(response)
       this.setState({
-      // reset the add todo form to a blank input
         title: "",
       })
     })
@@ -90,7 +105,7 @@ class TodoContainer extends Component {
           </div>
         </form>
 
-        <AllTodos removeProjectTodos={this.removeProjectTodos} updateTodo={this.updateTodo} todos={this.props.project.todos}/>
+        <AllTodos removeProjectTodo={this.removeProjectTodo} updateTodo={this.updateTodo} todos={this.props.project.todos}/>
       </div>
     )
   }

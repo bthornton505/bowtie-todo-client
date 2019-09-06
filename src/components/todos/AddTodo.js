@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import API_URL from '../fetchRequests/apiUrl';
-import { Redirect } from 'react-router-dom';
+import API_URL from '../../fetchRequests/apiUrl';
 
 class AddTodo extends Component {
   constructor(props){
