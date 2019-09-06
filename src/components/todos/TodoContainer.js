@@ -105,7 +105,11 @@ class TodoContainer extends Component {
           </div>
         </form>
 
-        <AllTodos removeProjectTodo={this.removeProjectTodo} updateTodo={this.updateTodo} todos={this.props.project.todos}/>
+        <AllTodos
+          removeProjectTodo={this.removeProjectTodo}
+          updateTodo={this.updateTodo}
+          todos={this.props.project.todos}
+        />
       </div>
     )
   }
