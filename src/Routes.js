@@ -10,18 +10,19 @@ import ProjectDetails from './components/ProjectDetails';
 import EditProject from './components/EditProject';
 
 const Routes = (props) => {
+  console.log(props)
 
   const guestViews = (
     <Switch>
       <Route exact path="/" component={LandingPage} />
-      <Route path="/signup" component={Register} />
-      <Route path="/login" component={Login} />
+      <Route path="/signup" render={() => <Register handleLoginChange={props.handleLoginChange}/>} />
+      <Route path="/login" render={() => <Login handleLoginChange={props.handleLoginChange} />} />
     </Switch>
   )
 
   const userViews = (
     <Switch>
-      <Route exact path="/projects" component={ProjectsContainer} />
+      <Route exact path="/projects" render={() => <ProjectsContainer handleLoginChange={props.handleLoginChange}/>} />
       <Route exact path="/project/new" component={ProjectForm} />
       <Route exact path="/project/:id" component={ProjectDetails}/>
       <Route exact path="/project/:id/edit" component={EditProject} />
@@ -31,7 +32,7 @@ const Routes = (props) => {
 
   return(
     <Router>
-      {props.isAuthenticated ? userViews : guestViews}
+      {props.loggedIn ? userViews : guestViews}
     </Router>
   )
 }
