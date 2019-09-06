@@ -4,8 +4,6 @@ import Button from '../Button';
 import { Redirect } from 'react-router-dom';
 import API_URL from '../../fetchRequests/apiUrl';
 
-const getToken = () => localStorage.getItem('auth_token')
-
 class ProjectsContainer extends Component {
   constructor(){
     super()
@@ -20,7 +18,7 @@ class ProjectsContainer extends Component {
     fetch(`${API_URL}/api/v1/projects`, {
       headers: {
         "Accept": "application/json",
-        "Authorization": `Bearer ${getToken()}`
+        "Authorization": `Bearer ${localStorage.auth_token}`
       }
     })
     .then(response => response.json())
@@ -34,9 +32,8 @@ class ProjectsContainer extends Component {
 
   handleLogout = event => {
     event.preventDefault();
-    // logout()
-    localStorage.clear()
 
+    localStorage.clear()
     this.setState({
       loggedOut: true
     }, () => this.props.handleLoginChange())
@@ -49,14 +46,12 @@ class ProjectsContainer extends Component {
     }
 
     const projects = this.state.projects
-    console.log(projects)
 
     return(
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">Projects</h2>
 
         <AllProjects projects={projects} />
-        {/* Need to create Project component which will fetch the desired project */}
 
         <div className="flex-row text-center pt-4">
           <button
