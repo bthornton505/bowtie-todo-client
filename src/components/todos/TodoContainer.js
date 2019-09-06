@@ -33,7 +33,7 @@ class TodoContainer extends Component {
     // We take our new todo and update the specific index with its new value
     todos[todoIndex] = todo
     // Once the todo is properly constructed we send it in our fetch request to the server
-    networkRequest(`/todos/${id}`, 'PATCH', todo)
+    networkRequest(`todos/${id}`, 'PATCH', todo)
     // Lastly, we update the state of our ProjectDetails component which then,
     // updates the AllTodos component
     this.props.addOrRemoveTodo(todos)
@@ -53,7 +53,7 @@ class TodoContainer extends Component {
   // This function handles deleting a projects todos
   removeProjectTodo = (id) => {
     // We send our Delete Fetch request with the todo id
-    networkRequest(`/todos/${id}`, 'DELETE')
+    networkRequest(`todos/${id}`, 'DELETE')
     // Then construct an updated version of the projects todos
     const newTodos = this.props.project.todos.filter(todo => todo.id !== id)
     // We then update the state of our ProjectDetails component which then,
