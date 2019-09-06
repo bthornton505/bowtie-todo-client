@@ -1,5 +1,17 @@
 import API_URL from './apiUrl';
 
+export const networkRequest = async (endpoint, method, body = {}) => 
+  await fetch(`${API_URL}/api/v1/${endpoint}`, {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.auth_token}`
+    },
+    body: JSON.stringify( body )
+  })
+  .then(response => response.json())
+
+
 // const authRequest = () => {
 //   return {
 //     message: "AUTHENTICATION REQUEST"
@@ -14,40 +26,42 @@ const authSuccess = (user, token) => {
   }
 }
 
-const authFailure = (errors) => {
-  return {
-    message: "AUTHENTICATION FAILURE",
-    errors: errors
-  }
-}
+// const authFailure = (errors) => {
+//   return {
+//     message: "AUTHENTICATION FAILURE",
+//     errors: errors
+//   }
+// }
 
 
-export const signup = (user) => {
+export const signup = async (user) => {
   const newUser = user
-  fetch(`${API_URL}/api/v1/signup`, {
+
+  return await fetch(`${API_URL}/api/v1/signup`, {
     method: "POST",
     headers: {
-      'Accept': "application/json",
+      // 'Accept': "application/json",
       'Content-Type': "application/json"
     },
     body: JSON.stringify( user )
   })
-  .then(response => console.log(response.json()))
-  .then(resp => {
-    authenticate({
+  .then(response => response.json())
+  .then(async (resp) =>
+    await authenticate({
       username: newUser.username,
       email: newUser.email,
       password: newUser.password})
-  })
+  )
   .catch((errors) => {
-    authFailure(errors)
+    // authFailure(errors)
+    console.log(errors)
   })
 }
 
-export const authenticate = (credentials) => {
+export const authenticate = async (credentials) => {
   console.log("calling function")
 
-  fetch(`${API_URL}/api/v1/auth/login`, {
+  return await fetch(`${API_URL}/api/v1/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -55,19 +69,16 @@ export const authenticate = (credentials) => {
     body: JSON.stringify( credentials )
   })
   .then(response => response.json())
-  .then(({ auth_token }) => {
+  .then(({ auth_token, email }) => {
+    // if (!email) return false
     if (!auth_token) return false
     localStorage.setItem('auth_token', auth_token);
     // console.log(credentials)
     return getUser(credentials)
   })
-  .then((user) => {
-    authSuccess(user, localStorage.auth_token)
-  })
   .catch((errors) => {
-    authFailure(errors)
-    // console.log(errors)
-
+    // authFailure(errors)
+    console.log(errors)
   })
 }
 
@@ -89,7 +100,7 @@ export const getUser = (credentials) => {
     // return user
   })
   .catch(error => {
-    authFailure(error)
+    // authFailure(error)
     console.log(error);
   });
 }
@@ -100,7 +111,6 @@ export const logout = () => {
 
 export const checkToken = (token) => {
   console.log("calling function")
-  // authRequest()
 
   return fetch(`/api/auth/check_token`, {
     method: "GET",
@@ -119,8 +129,8 @@ export const checkToken = (token) => {
       authSuccess(user, localStorage.auth_token)
   })
   .catch((errors) => {
-    authFailure(errors)
-    // console.log(errors)
+    // authFailure(errors)
+    console.log(errors)
     localStorage.clear()
   })
 }
