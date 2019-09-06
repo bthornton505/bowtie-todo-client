@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Routes from './Routes'
 
-// import { checkToken } from './fetchRequests/requests'
-
 class App extends Component {
   constructor(){
     super()
@@ -18,19 +16,7 @@ class App extends Component {
     })
   }
 
-  // componentDidMount = () => {
-  //   const isAuthenticated = localStorage.getItem('isAuthenticated')
-  //   console.log(isAuthenticated)
-  //
-  //   if (isAuthenticated === true){
-  //     this.setState({
-  //       authUser: true
-  //     })
-  //   }
-  // }
-
   render(){
-    // const { user, userId, isAuthenticated } = this.state
     const user = localStorage.getItem('user')
     const userId = localStorage.getItem('userId')
 
