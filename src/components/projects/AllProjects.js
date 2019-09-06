@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-
 const AllProjects = (props) => {
    const projectList = props.projects.map(project => {
      return(
        <li key={project.id} className="list-group-item list-group-item-action">
-        <Link to={{
-          pathname: `/project/${project.id}`,
-        }}>
+        <Link
+          to={{
+            pathname: `/project/${project.id}`,
+          }}
+          className="h5 text-dark"
+        >
           {project.title}
         </Link>
        </li>

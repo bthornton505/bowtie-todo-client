@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import Button from './Button';
-import AddTodo from './AddTodo'
-import API_URL from '../fetchRequests/apiUrl';
-import AllTodos from './AllTodos';
-import TodoContainer from './TodoContainer';
+import Button from '../Button';
+import API_URL from '../../fetchRequests/apiUrl';
+import TodoContainer from '../todos/TodoContainer';
 
 class ProjectDetails extends Component {
   state = {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import AllProjects from './AllProjects';
-import Button from './Button';
-import { Redirect, withRouter } from 'react-router-dom';
-import API_URL from '../fetchRequests/apiUrl';
-// import { logout } from '../fetchRequests/requests'
+import Button from '../Button';
+import { Redirect } from 'react-router-dom';
+import API_URL from '../../fetchRequests/apiUrl';
+
 const getToken = () => localStorage.getItem('auth_token')
 
 class ProjectsContainer extends Component {
@@ -73,4 +73,4 @@ class ProjectsContainer extends Component {
   }
 }
 
-export default withRouter(ProjectsContainer);
+export default ProjectsContainer;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Button from './Button';
+import Button from '../Button';
 import { Redirect } from 'react-router-dom';
-import API_URL from '../fetchRequests/apiUrl';
+import API_URL from '../../fetchRequests/apiUrl';
 
 class ProjectForm extends Component {
   constructor(props){

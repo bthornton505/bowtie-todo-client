@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Button from './Button';
+import Button from '../Button';
 import { Redirect } from 'react-router-dom';
-import API_URL from '../fetchRequests/apiUrl';
-import AddTodo from './AddTodo';
+import { networkRequest } from '../../fetchRequests/requests';
 
 class EditProject extends Component {
   constructor(props){
@@ -11,11 +10,6 @@ class EditProject extends Component {
     this.state = {
       project: this.props.location.state.project,
       title: this.props.location.state.project.title,
-      // todo: {
-      //   title: "",
-      //   completed: false
-      // },
-      // todos: [],
       updated: false
     }
   }
@@ -27,40 +21,21 @@ class EditProject extends Component {
     });
   }
 
-  // handleTodoChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: {
-  //       title: value,
-  //       completed: false
-  //     }
-  //   });
-  // }
-
   handleUpdate = event => {
     event.preventDefault();
+    // Use these variables to construct the updated project
     const projectId = this.state.project.id
     const project = {title: this.state.title, userId: this.state.project.userId}
-
-    fetch(`${API_URL}/api/v1/projects/${projectId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": 'application/json',
-        "Authorization": `Bearer ${localStorage.auth_token}`
-      },
-      body: JSON.stringify( project )
-    })
-    .then(response => response.json())
-    .then(() => this.setState({
+    // Create new fetch request to send updated project to server
+    networkRequest(`projects/${projectId}`, 'PATCH', project)
+    this.setState({
       updated: true
-    }))
-    .catch(error => console.log(error))
-
+    })
   }
 
   render(){
     const { project, updated } = this.state
-
+    // If the project has been updated, redirect to the updated project
     if (updated === true){
       return <Redirect to={`/project/${project.id}`} />
     }
