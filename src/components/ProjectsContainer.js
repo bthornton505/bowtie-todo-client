@@ -4,6 +4,7 @@ import Button from './Button';
 import { Redirect, withRouter } from 'react-router-dom';
 import API_URL from '../fetchRequests/apiUrl';
 // import { logout } from '../fetchRequests/requests'
+const getToken = () => localStorage.getItem('auth_token')
 
 class ProjectsContainer extends Component {
   constructor(){
@@ -19,7 +20,7 @@ class ProjectsContainer extends Component {
     fetch(`${API_URL}/api/v1/projects`, {
       headers: {
         "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.auth_token}`
+        "Authorization": `Bearer ${getToken()}`
       }
     })
     .then(response => response.json())
@@ -34,10 +35,11 @@ class ProjectsContainer extends Component {
   handleLogout = event => {
     event.preventDefault();
     // logout()
-    localStorage.clear();
+    localStorage.clear()
+
     this.setState({
       loggedOut: true
-    })
+    }, () => this.props.handleLoginChange())
   }
 
   render() {
