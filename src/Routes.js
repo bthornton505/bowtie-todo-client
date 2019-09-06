@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Register from './authentication/Register';
 import Login from './authentication/Login';
-import ProjectsContainer from './components/ProjectsContainer';
-import ProjectForm from './components/ProjectForm';
-import ProjectDetails from './components/ProjectDetails';
-import EditProject from './components/EditProject';
+import ProjectsContainer from './components/projects/ProjectsContainer';
+import ProjectForm from './components/projects/ProjectForm';
+import ProjectDetails from './components/projects/ProjectDetails';
+import EditProject from './components/projects/EditProject';
 
 const Routes = (props) => {
   console.log(props)
