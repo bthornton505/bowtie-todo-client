@@ -4,6 +4,7 @@ import Button from './Button';
 import AddTodo from './AddTodo'
 import API_URL from '../fetchRequests/apiUrl';
 import AllTodos from './AllTodos';
+import TodoContainer from './TodoContainer';
 
 class ProjectDetails extends Component {
   state = {
@@ -28,24 +29,6 @@ class ProjectDetails extends Component {
     .catch(error => console.log(error))
   }
 
-  updateTodo = (event, todo) => {
-    event.preventDefault();
-
-    fetch(`${API_URL}/api/v1/todos/${todo.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": 'application/json',
-        "Authorization": `Bearer ${localStorage.auth_token}`
-      },
-      body: JSON.stringify( todo )
-    })
-    .then(response => response.json())
-    // .then(() => this.setState({
-    //   updated: true
-    // }))
-    .catch(error => console.log(error))
-  }
-
   deleteProject = (event) => {
     const { project } = this.state
 
@@ -67,6 +50,15 @@ class ProjectDetails extends Component {
     .catch(error => console.log(error))
   }
 
+  addOrRemoveTodo = (todos) => {
+    this.setState({
+      project: Object.assign({}, this.state.project, {
+        ...this.state.project,
+        todos
+      })
+    })
+  }
+
   render(){
     const { project, projectDeleted } = this.state
 
@@ -78,15 +70,13 @@ class ProjectDetails extends Component {
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">{project.title}</h2>
 
-        <AddTodo projectId={project.id} />
-
-        <AllTodos todos={project.todos}/>
+        <TodoContainer addOrRemoveTodo={this.addOrRemoveTodo} project={project} />
 
         <div className="flex-row text-center pt-4">
           <Button path={'/projects'} buttonText={'Back'}/>
           <Button path={`/project/${project.id}/edit`}
             state={project}
-            buttonText={'Edit'}
+            buttonText={'Rename'}
           />
           <button type="submit" className="m-2 btn btn-primary" onClick={this.deleteProject}>
             Delete
