@@ -23,6 +23,7 @@ class ProjectsContainer extends Component {
     })
     .then(response => response.json())
     .then(projects => {
+      console.log(projects)
       this.setState({
         projects: projects
       })
