@@ -43,7 +43,7 @@ class ProjectsContainer extends Component {
     const { loggedOut } = this.state
     if (loggedOut === true) {
       return <Redirect to="/login" />
-    }
+    } 
 
     const projects = this.state.projects
 
