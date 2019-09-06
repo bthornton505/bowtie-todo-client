@@ -10,6 +10,7 @@ class ProjectDetails extends Component {
     projectDeleted: false
   }
 
+  // Here we request the individual project
   componentDidMount = () => {
     const projectId = this.props.match.params.id
 
@@ -27,6 +28,7 @@ class ProjectDetails extends Component {
     .catch(error => console.log(error))
   }
 
+  // This function handles deleting the project
   deleteProject = (event) => {
     const { project } = this.state
 
@@ -48,6 +50,7 @@ class ProjectDetails extends Component {
     .catch(error => console.log(error))
   }
 
+  // This function handles updating the projects todos without mutating state directly
   addOrRemoveTodo = (todos) => {
     this.setState({
       project: Object.assign({}, this.state.project, {
