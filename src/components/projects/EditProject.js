@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../Button';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { networkRequest } from '../../fetchRequests/requests';
 
 class EditProject extends Component {
@@ -65,4 +65,4 @@ class EditProject extends Component {
   }
 }
 
-export default EditProject;
+export default withRouter(EditProject);
