@@ -20,6 +20,7 @@ Assuming you have React and Node.js installed,
   - Run `$ npm install`
   - Run `$ npm start`
 - Now you should have the app open up in your browser
+- Make sure you're running [bowtie-todo-api](https://github.com/bthornton505/bowtie-todo-api) before you start-up this application. You need both for the app to work properly.
 
 ## Frameworks and Libraries Used
 
