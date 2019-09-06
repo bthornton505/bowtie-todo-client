@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import Button from '../Button';
 import API_URL from '../../fetchRequests/apiUrl';
 import TodoContainer from '../todos/TodoContainer';
@@ -88,4 +88,4 @@ class ProjectDetails extends Component {
   }
 }
 
-export default ProjectDetails;
+export default withRouter(ProjectDetails);
