@@ -43,7 +43,7 @@ class ProjectsContainer extends Component {
     const { loggedOut } = this.state
     if (loggedOut === true) {
       return <Redirect to="/login" />
-    } 
+    }
 
     const projects = this.state.projects
 
@@ -51,7 +51,7 @@ class ProjectsContainer extends Component {
       <div className="border border-secondary p-4 rounded-lg">
         <h2 className="text-center p-3">Projects</h2>
 
-        <AllProjects projects={projects} />
+        <AllProjects projects={projects.projects} />
 
         <div className="flex-row text-center pt-4">
           <button
