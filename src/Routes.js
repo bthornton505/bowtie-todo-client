@@ -10,7 +10,6 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import EditProject from './components/projects/EditProject';
 
 const Routes = (props) => {
-  console.log(props)
 
   const guestViews = (
     <Switch>
@@ -26,7 +25,6 @@ const Routes = (props) => {
       <Route exact path="/project/new" component={ProjectForm} />
       <Route exact path="/project/:id" component={ProjectDetails}/>
       <Route exact path="/project/:id/edit" component={EditProject} />
-      {/* The above route needs to render a Project component */}
     </Switch>
   )
 
