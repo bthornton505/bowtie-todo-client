@@ -32,8 +32,6 @@ class ProjectDetails extends Component {
   deleteProject = (event) => {
     const { project } = this.state
 
-    window.alert('Do you want to delete this project?')
-
     fetch(`${API_URL}/api/v1/projects/${project.id}`, {
       method: "DELETE",
       headers: {
