@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import LandingPage from './components/LandingPage';
 import Register from './authentication/Register';
@@ -11,26 +11,20 @@ import EditProject from './components/projects/EditProject';
 
 const Routes = (props) => {
 
-  const guestViews = (
-    <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route path="/signup" render={() => <Register handleLoginChange={props.handleLoginChange}/>} />
-      <Route path="/login" render={() => <Login handleLoginChange={props.handleLoginChange} />} />
-    </Switch>
-  )
-
-  const userViews = (
-    <Switch>
-      <Route exact path="/projects" render={() => <ProjectsContainer handleLoginChange={props.handleLoginChange}/>} />
-      <Route exact path="/project/new" component={ProjectForm} />
-      <Route exact path="/project/:id" component={ProjectDetails}/>
-      <Route exact path="/project/:id/edit" component={EditProject} />
-    </Switch>
-  )
-
   return(
     <Router>
-      {props.loggedIn ? userViews : guestViews}
+      <Switch>
+        {/* Guest routes before logging in */}
+        <Route exact path="/" component={() => props.loggedIn ? <Redirect to="/projects"/> : <LandingPage />} />
+        <Route path="/signup" render={() => props.loggedIn ? <Redirect to="/projects"/> : <Register handleLoginChange={props.handleLoginChange}/>} />
+        <Route path="/login" render={() => props.loggedIn ? <Redirect to="/projects"/> : <Login handleLoginChange={props.handleLoginChange} />} />
+
+        {/* User routes after logging in */}
+        <Route exact path="/projects" render={() => props.loggedIn ? <ProjectsContainer handleLoginChange={props.handleLoginChange}/> : <Redirect to="/login"/> } />
+        <Route exact path="/project/new" component={() => props.loggedIn ? <ProjectForm /> : <Redirect to="/login"/>} />
+        <Route exact path="/project/:id" component={() => props.loggedIn ? <ProjectDetails /> : <Redirect to="/login"/>}/>
+        <Route exact path="/project/:id/edit" component={() => props.loggedIn ? <EditProject /> : <Redirect to="/login"/>} />
+      </Switch>
     </Router>
   )
 }
