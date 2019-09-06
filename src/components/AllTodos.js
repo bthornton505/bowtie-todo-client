@@ -4,12 +4,12 @@ import Todo from './Todo';
 const AllTodos = (props) => {
   const todoList = props.todos.map(todo => {
     return(
-      <Todo todo={todo} />
+      <Todo removeProjectTodos={props.removeProjectTodos} updateTodo={props.updateTodo} key={todo.id} todo={todo} />
     )
   })
 
   return(
-    <ul className="text-center list-group">
+    <ul className="list-group">
         {todoList}
     </ul>
   )
