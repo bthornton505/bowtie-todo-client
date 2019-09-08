@@ -87,6 +87,8 @@ class TodoContainer extends Component {
   }
 
   render(){
+    const { todos } = this.props.project
+
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -108,7 +110,7 @@ class TodoContainer extends Component {
         <AllTodos
           removeProjectTodo={this.removeProjectTodo}
           updateTodo={this.updateTodo}
-          todos={this.props.project.todos}
+          todos={todos}
         />
       </div>
     )
