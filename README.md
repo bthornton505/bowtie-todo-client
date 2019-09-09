@@ -41,7 +41,7 @@ Assuming you have React and Node.js installed,
 
 ## Frameworks and Libraries Used
 
-- Front-end: [React](https://reactjs.org/)
+- [React](https://reactjs.org/)
 - [Docker](https://www.docker.com/)
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 - [Twitter Bootstrap](https://getbootstrap.com/)
